@@ -1,38 +1,210 @@
-.App {
-  text-align: center;
+.esri-attribution {
+  display: none;
+  /* or */
+  /* position: absolute;
+  left: -9999px; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+b {
+  color: orange;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+br {
+  content: "";
+  margin: 2em;
+  display: block;
+  font-size: 24%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+calcite-tab,
+calcite-tabs {
+  --calcite-color-border-3: #555555;
+  --calcite-color-border-2: #555555;
+  --calcite-color-border-1: #555555;
+}
+
+calcite-action-bar {
+  --calcite-color-border-3: #555555;
+  --calcite-color-text-3: #bfbfbf;
+}
+
+calcite-shell {
+  --calcite-color-foreground-1: #2b2b2b;
+  --calcite-color-text-1: #ffffff;
+  --calcite-color-background: #2b2b2b;
+  --calcite-color-border-3: #555555;
+}
+
+calcite-shell-panel {
+  --calcite-color-foreground-1: #2b2b2b;
+  --calcite-color-foreground-2: #2b2b2b;
+  --calcite-color-border-3: #555555;
+}
+
+calcite-panel {
+  overflow-y: auto;
+  --calcite-color-foreground-1: #2b2b2b;
+  --calcite-color-foreground-2: #2b2b2b;
+  --calcite-color-text-2: #ffffff;
+  background-color: #2b2b2b;
+  --calcite-color-border-3: #555555;
+}
+
+calcite-list {
+  overflow-y: auto;
+  --calcite-color-border-3: #555555;
+}
+
+calcite-label {
+  --calcite-color-text-1: #9ca3af;
+  --calcite-font-size--1: 1.5rem;
+  /* margin-top: 1vh; */
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+#layers-container {
+  overflow-y: auto;
+}
+
+.calcitePanelBasemaps {
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+
+.esri-legend__layer-caption {
+  display: none;
+}
+
+.calcite-tutorial {
+  --calcite-color-brand: #039851;
+  --calcite-color-brand-hover: #008d52;
+}
+
+.calcite-tutorial calcite-chip {
+  --calcite-color-foreground-2: var(--calcite-color-brand);
+  --calcite-color-text-1: white;
+  margin-inline-end: 0.75rem;
+}
+
+/* Utility Chart Panel */
+.lotNumberImage {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding-left: 20px;
+}
+
+/* Header */
+.headerTitle {
   color: white;
+  margin-left: 1rem;
+  font-size: 2.6vh;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.date {
+  color: gray;
+  font-size: 0.8rem;
+  width: 150px;
+  height: 20px;
+  margin-top: auto;
+  margin-left: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dropdownFilter {
+  height: 50px;
+  width: 70%;
+  border-color: rgb(0, 0, 0, 0);
+  padding-top: 10px;
+  margin-left: -10rem;
+  margin: auto;
+}
+
+.dropdownFilterLayout {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  color: black;
+  justify-content: right;
+}
+
+/* total Progress */
+
+.totalProgressDiv {
+  display: flex;
+  padding-left: 20px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.totalProgressLabel {
+  color: white;
+  font-size: 1.5vw;
+  padding-bottom: 0.3vh;
+  padding-top: 0.6vh;
+}
+
+.totalProgressNumber {
+  color: #d1d5db;
+  font-size: 3.3vw;
+  font-weight: bold;
+  font-family: "calibri";
+  margin-left: 25px;
+}
+
+.totalProgressNumber2 {
+  color: white;
+  font-size: 1vw;
+  font-weight: normal;
+  padding-top: 0.5vh;
+  margin-left: 10px;
+}
+
+#utilityNumberDiv {
+  width: 50%;
+  height: 10%;
+  padding-top: 2%;
+  padding-left: 15px;
+  font-size: 1vw;
+  color: #f7f5f7;
+}
+
+#utilityNumberDiv b {
+  font-size: 2.5vw;
+  font-family: "Calibri";
+  font-weight: bold;
+  color: #6ede00;
+  /*#d4ff33;*/
+  margin: auto;
+}
+
+/* Information panel */
+.informationDiv {
+  padding-right: 10px;
+}
+
+.esri-legend * {
+  background-color: #2b2b2b;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #00032235;
+
+  /*#032235*/
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00032235;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00032235;
 }
