@@ -1,11 +1,11 @@
-import { LabelSymbol3D, TextSymbol3DLayer } from '@arcgis/core/symbols';
-import LineCallout3D from '@arcgis/core/symbols/callouts/LineCallout3D';
+import { LabelSymbol3D, TextSymbol3DLayer } from "@arcgis/core/symbols";
+import LineCallout3D from "@arcgis/core/symbols/callouts/LineCallout3D";
 
 interface labelSymbol3DProps {
   materialColor: any;
   fontSize?: number;
   fontFamily?: string;
-  fontWeight?: 'normal' | 'bold';
+  fontWeight?: "normal" | "bold";
   haloColor?: any;
   haloSize?: number;
   vOffsetScreenLength?: number;

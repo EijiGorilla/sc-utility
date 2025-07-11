@@ -14,12 +14,14 @@ import {
   MeshSymbol3D,
   FillSymbol3DLayer,
   SimpleLineSymbol,
+  LabelSymbol3D,
+  TextSymbol3DLayer,
 } from "@arcgis/core/symbols";
 import SolidEdges3D from "@arcgis/core/symbols/edges/SolidEdges3D";
 import SizeVariable from "@arcgis/core/renderers/visualVariables/SizeVariable";
 import RotationVariable from "@arcgis/core/renderers/visualVariables/RotationVariable";
-import { labelSymbol3DLine } from "./Label";
 import GroupLayer from "@arcgis/core/layers/GroupLayer";
+import { labelSymbol3DLine } from "./Label";
 
 /* Standalone table for Dates */
 export const dateTable = new FeatureLayer({
@@ -238,20 +240,37 @@ export const rowLayer = new FeatureLayer({
 });
 
 // * Station Layer * //
-const stationLayerTextSymbol = labelSymbol3DLine({
-  materialColor: "#d4ff33",
-  fontSize: 15,
-  fontFamily: "Ubuntu Mono",
-  fontWeight: "normal",
-  haloColor: "black",
-  haloSize: 0.5,
-  vOffsetScreenLength: 100,
-  vOffsetMaxWorldLength: 700,
-  vOffsetMinWorldLength: 80,
-});
-
-var labelClass = new LabelClass({
-  symbol: stationLayerTextSymbol,
+const stationLayerTextSymbol = new LabelClass({
+  symbol: new LabelSymbol3D({
+    symbolLayers: [
+      new TextSymbol3DLayer({
+        material: {
+          color: "#d4ff33",
+        },
+        size: 13,
+        halo: {
+          color: "black",
+          size: 0.5,
+        },
+        font: {
+          family: "Ubuntu Mono",
+        },
+      }),
+    ],
+    verticalOffset: {
+      screenLength: 70,
+      maxWorldLength: 200,
+      minWorldLength: 150,
+    },
+    callout: {
+      type: "line", // autocasts as new LineCallout3D()
+      color: "white",
+      size: 0.7,
+      border: {
+        color: "grey",
+      },
+    },
+  }),
   labelPlacement: "above-center",
   labelExpressionInfo: {
     expression: 'DefaultValue($feature.Station, "no data")',
@@ -268,7 +287,7 @@ export const stationLayer = new FeatureLayer({
   },
   layerId: 6,
   title: "Station",
-  labelingInfo: [labelClass],
+  labelingInfo: [stationLayerTextSymbol],
   elevationInfo: {
     mode: "relative-to-ground",
   },
@@ -1024,26 +1043,24 @@ export const utilityLineLayer1 = new FeatureLayer({
 });
 
 // * Viaduct * //
-const colorViaduct = [
+const colorStatus = [
   [225, 225, 225, 0.1], // To be Constructed (white)
-  [130, 130, 130, 0.5], // Under Construction
+  [211, 211, 211, 0.5], // Under Construction
   [255, 0, 0, 0.8], // Delayed
   [0, 112, 255, 0.8], // Completed
 ];
 
-function renderViaductLayer() {
-  const renderer = new UniqueValueRenderer({
-    field: "Status",
-  });
-
-  for (var i = 0; i < colorViaduct.length; i++) {
-    renderer.addUniqueValueInfo({
-      value: i + 1,
+const viaduct_renderer = new UniqueValueRenderer({
+  field: "Status",
+  uniqueValueInfos: [
+    {
+      value: 1,
+      label: "To be Constructed",
       symbol: new MeshSymbol3D({
         symbolLayers: [
           new FillSymbol3DLayer({
             material: {
-              color: colorViaduct[i],
+              color: colorStatus[0],
               colorMixMode: "replace",
             },
             edges: new SolidEdges3D({
@@ -1052,10 +1069,42 @@ function renderViaductLayer() {
           }),
         ],
       }),
-    });
-  }
-  viaductLayer.renderer = renderer;
-}
+    },
+    {
+      value: 2,
+      symbol: new MeshSymbol3D({
+        symbolLayers: [
+          new FillSymbol3DLayer({
+            material: {
+              color: colorStatus[1],
+              colorMixMode: "replace",
+            },
+            edges: new SolidEdges3D({
+              color: [225, 225, 225, 0.3],
+            }),
+          }),
+        ],
+      }),
+    },
+    {
+      value: 4,
+      label: "Completed",
+      symbol: new MeshSymbol3D({
+        symbolLayers: [
+          new FillSymbol3DLayer({
+            material: {
+              color: colorStatus[3],
+              colorMixMode: "replace",
+            },
+            edges: new SolidEdges3D({
+              color: [225, 225, 225, 0.3],
+            }),
+          }),
+        ],
+      }),
+    },
+  ],
+});
 
 export const viaductLayer = new SceneLayer({
   portalItem: {
@@ -1068,10 +1117,9 @@ export const viaductLayer = new SceneLayer({
     mode: "absolute-height", //absolute-height, relative-to-ground
   },
   title: "Viaduct",
+  renderer: viaduct_renderer,
   // outFields: ['*'],
 });
-
-renderViaductLayer();
 
 export const utilityGroupLayer = new GroupLayer({
   title: "Utility Relocation",

@@ -39,6 +39,7 @@ function MapDisplay() {
       // arcgisScene.map.ground.opacity = 0.5;
       arcgisScene.view.environment.atmosphereEnabled = false;
       arcgisScene.map.ground.navigationConstraint = "none";
+      arcgisScene.view.environment.starsEnabled = false;
       arcgisSearch.sources = [
         {
           layer: pierNoLayer,
