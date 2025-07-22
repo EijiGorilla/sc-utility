@@ -8,11 +8,10 @@ function Header() {
         id="header-title"
         style={{
           display: "flex",
-          width: "97.55%",
           height: "70px",
           padding: "0 1rem",
           borderStyle: "solid",
-          borderWidth: 3.5,
+          borderWidth: 4,
           borderColor: "#555555",
         }}
       >
